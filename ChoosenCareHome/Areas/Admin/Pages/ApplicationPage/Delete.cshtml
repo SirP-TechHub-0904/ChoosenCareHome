@@ -1,0 +1,520 @@
+﻿@page
+@model ChoosenCareHome.Areas.Admin.Pages.ApplicationPage.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Application</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.MiddleName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.MiddleName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DateOfBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DateOfBirth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.NationalInsNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.NationalInsNo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Postcode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Postcode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.HomeTel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.HomeTel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Mobile)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Mobile)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EMail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EMail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.MaritalStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.MaritalStatus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.NextOfKin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.NextOfKin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Relationship)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Relationship)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoYouHavePermissionToWorkInTheUk)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoYouHavePermissionToWorkInTheUk)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoYouHaveAValidPassport)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoYouHaveAValidPassport)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.YouHaveAValidWorkPermit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.YouHaveAValidWorkPermit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoYouHaveAccessToACarWhichCanBeUsedForWorkPurposes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoYouHaveAccessToACarWhichCanBeUsedForWorkPurposes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoYouHoldAFullUkDrivingLicence)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoYouHoldAFullUkDrivingLicence)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoctorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoctorName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoctorAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoctorAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoctorPostcode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoctorPostcode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.DoctorPhone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.DoctorPhone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.FullTime_PartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.FullTime_PartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.IfPartTime_HowManyHoursPerWeekDoYouWantToWork_HomeCareAndPopInVisits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.IfPartTime_HowManyHoursPerWeekDoYouWantToWork_HomeCareAndPopInVisits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.HomeCareAndPopInVisits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.HomeCareAndPopInVisits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Hospitals)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Hospitals)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Nursing_ResidentialHomes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Nursing_ResidentialHomes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Morning_Day_Evening_NightSleeperDuty)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Morning_Day_Evening_NightSleeperDuty)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.PleaseStateIfYouAreAbleToWorkAsA24_HourResidential_Live_In_Care)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.PleaseStateIfYouAreAbleToWorkAsA24_HourResidential_Live_In_Care)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.IfYes_WouldYouLike_LongOrShort_Assignments)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.IfYes_WouldYouLike_LongOrShort_Assignments)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.WouldYouAcceptALive_InAssignmentSomeDistanceFromYourHome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.WouldYouAcceptALive_InAssignmentSomeDistanceFromYourHome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.IfNo_PleaseSpecifyPreferredAreas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.IfNo_PleaseSpecifyPreferredAreas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Bath_Shower_StripWash)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Bath_Shower_StripWash)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.PressureAreaCare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.PressureAreaCare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.BedBath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.BedBath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.SimpleDressingProcedure)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.SimpleDressingProcedure)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.UseOfBathAids)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.UseOfBathAids)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.AssistingWithMedication)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.AssistingWithMedication)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Shaving)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Shaving)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.TerminalCare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.TerminalCare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.MouthCareIncDentures)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.MouthCareIncDentures)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.CareOfHair)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.CareOfHair)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.CareOfFeetExcToeNails)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.CareOfFeetExcToeNails)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.LightHousework)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.LightHousework)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.CareOfFingerNails)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.CareOfFingerNails)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.WashingPersonalLaundry)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.WashingPersonalLaundry)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Dressing_Undressing)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Dressing_Undressing)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Shopping)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Shopping)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.BedMaking_ChangingBedLinen)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.BedMaking_ChangingBedLinen)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.CollectingBenefits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.CollectingBenefits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.ContinenceCare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ContinenceCare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Bedpans_CommodesEtc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Bedpans_CommodesEtc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.ChangingACatheterBag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ChangingACatheterBag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Confidentiality)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Confidentiality)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EmptyingCatheterBag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EmptyingCatheterBag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.ReportWriting)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ReportWriting)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.RecordingInstructionsFromGp_DistrictNurse)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.RecordingInstructionsFromGp_DistrictNurse)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Observing_Recording)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Observing_Recording)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.ManeuveringAndHandlingCourse)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ManeuveringAndHandlingCourse)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.ChangesInClientsCondition)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ChangesInClientsCondition)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.UseOfHoistsMan_Elec)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.UseOfHoistsMan_Elec)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.UseOfWalkingAids)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.UseOfWalkingAids)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.PrivateHouse)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.PrivateHouse)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Nursing_Residential)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Nursing_Residential)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Home)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Home)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.AgeGroup)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.AgeGroup)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Registereddisability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Registereddisability)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.UnregisteredDisability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.UnregisteredDisability)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Nodisability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Nodisability)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginWhiteEuropean)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginWhiteEuropean)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginWhiteOther)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginWhiteOther)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginBlackAfrican)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginBlackAfrican)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginBlackCaribbean)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginBlackCaribbean)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginBlackOtherIndian)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginBlackOtherIndian)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginPakistani)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginPakistani)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginChinese)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginChinese)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginOther)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.EthnicOriginOther)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.HowDidYouHearAboutThePost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.HowDidYouHearAboutThePost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.AreYouRelatedOrDoYouKnowAnyMemberOfStaffAtChosenHealthcare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.AreYouRelatedOrDoYouKnowAnyMemberOfStaffAtChosenHealthcare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOﬀence)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOﬀence)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Application.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
