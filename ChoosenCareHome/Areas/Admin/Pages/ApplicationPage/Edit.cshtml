@@ -35,6 +35,11 @@
                 <span asp-validation-for="Application.Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Application.IdNumber" class="control-label"></label>
+                <input asp-for="Application.IdNumber" class="form-control" />
+                <span asp-validation-for="Application.IdNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Application.DateOfBirth" class="control-label"></label>
                 <input asp-for="Application.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Application.DateOfBirth" class="text-danger"></span>
@@ -68,6 +73,11 @@
                 <label asp-for="Application.EMail" class="control-label"></label>
                 <input asp-for="Application.EMail" class="form-control" />
                 <span asp-validation-for="Application.EMail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.UserId" class="control-label"></label>
+                <select asp-for="Application.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="Application.UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Application.MaritalStatus" class="control-label"></label>
@@ -390,9 +400,14 @@
                 <span asp-validation-for="Application.EthnicOriginBlackCaribbean" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Application.EthnicOriginBlackOtherIndian" class="control-label"></label>
-                <input asp-for="Application.EthnicOriginBlackOtherIndian" class="form-control" />
-                <span asp-validation-for="Application.EthnicOriginBlackOtherIndian" class="text-danger"></span>
+                <label asp-for="Application.EthnicOriginBlackOther" class="control-label"></label>
+                <input asp-for="Application.EthnicOriginBlackOther" class="form-control" />
+                <span asp-validation-for="Application.EthnicOriginBlackOther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Application.Indian" class="control-label"></label>
+                <input asp-for="Application.Indian" class="form-control" />
+                <span asp-validation-for="Application.Indian" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Application.EthnicOriginPakistani" class="control-label"></label>
@@ -420,9 +435,9 @@
                 <span asp-validation-for="Application.AreYouRelatedOrDoYouKnowAnyMemberOfStaffAtChosenHealthcare" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Application.HaveYouEverBeenConvictedOfACriminalOﬀence" class="control-label"></label>
-                <input asp-for="Application.HaveYouEverBeenConvictedOfACriminalOﬀence" class="form-control" />
-                <span asp-validation-for="Application.HaveYouEverBeenConvictedOfACriminalOﬀence" class="text-danger"></span>
+                <label asp-for="Application.HaveYouEverBeenConvictedOfACriminalOffence" class="control-label"></label>
+                <input asp-for="Application.HaveYouEverBeenConvictedOfACriminalOffence" class="form-control" />
+                <span asp-validation-for="Application.HaveYouEverBeenConvictedOfACriminalOffence" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions" class="control-label"></label>

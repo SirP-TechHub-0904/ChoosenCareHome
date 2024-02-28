@@ -28,7 +28,15 @@ namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
                 return NotFound();
             }
 
-            var application = await _context.Applications.FirstOrDefaultAsync(m => m.Id == id);
+            var application = await _context.Applications
+                .Include(x=>x.Qualifications)
+                .Include(x=>x.EmploymentHistories)
+                .Include(x=>x.ApplicationReferences)
+                .Include(x=>x.OccupationalHealthAssessments)
+                .Include(x=>x.Vacination)
+                .Include(x=>x.HealthQualifications)
+                .Include(x=>x.Documents)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (application == null)
             {
                 return NotFound();

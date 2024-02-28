@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChoosenCareHome.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<Profile, AppRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -20,5 +20,18 @@ namespace ChoosenCareHome.Data
         public DbSet<Vacination> Vacinations { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<NewsBlog> NewsBlogs { get; set; }
-    }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Documents> Documents { get; set; }
+        public DbSet<TimeSheet> TimeSheets { get; set; }
+        public DbSet<UserTimeSheet> UserTimeSheets { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+             
+        }
+
+     }
 }

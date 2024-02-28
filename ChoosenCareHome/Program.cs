@@ -1,5 +1,7 @@
 using ChoosenCareHome.Data;
+using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Identity;
+using ChoosenCareHome.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -11,10 +13,28 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<Profile, AppRole>()
                        .AddEntityFrameworkStores<ApplicationDbContext>()
-                       .AddDefaultTokenProviders(); 
+                       .AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Password settings.
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+
+    options.User.AllowedUserNameCharacters =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.Lockout.AllowedForNewUsers = false;
+
+});
+
 
 var app = builder.Build();
 

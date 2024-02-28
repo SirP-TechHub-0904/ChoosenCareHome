@@ -41,8 +41,9 @@ namespace ChoosenCareHome.Pages.Data
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-             
-            _context.Attach(Qualification).State = EntityState.Modified;
+
+            //_context.Attach(Qualification).State = EntityState.Modified;
+            _context.Qualifications.Add(Qualification);
 
             try
             {
@@ -62,7 +63,8 @@ namespace ChoosenCareHome.Pages.Data
             }
             QualificationList = await _context.Qualifications.Where(m => m.ApplicationId == Qualification.ApplicationId).ToListAsync();
 
-            return RedirectToPage();
+            return RedirectToPage("./QualificationPage", new { id = Qualification.ApplicationId });
+
         }
         public async Task<IActionResult> OnPostDeleteAsync(int? id)
         {
@@ -81,7 +83,7 @@ namespace ChoosenCareHome.Pages.Data
             }
             QualificationList = await _context.Qualifications.Where(m => m.ApplicationId == Qualification.Id).ToListAsync();
 
-            return RedirectToPage();
+            return RedirectToPage("./QualificationPage", new { id = Qualification.ApplicationId });
         }
         private bool QualificationExists(int id)
         {

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ChoosenCareHome.Data.Migrations
+namespace ChoosenCareHome.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240214074909_jsd")]
-    partial class jsd
+    [Migration("20240228163746_jkd")]
+    partial class jkd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,37 @@ namespace ChoosenCareHome.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.AppRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
 
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Application", b =>
                 {
@@ -123,7 +154,7 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Property<string>("EthnicOriginBlackCaribbean")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EthnicOriginBlackOtherIndian")
+                    b.Property<string>("EthnicOriginBlackOther")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EthnicOriginChinese")
@@ -147,7 +178,7 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Property<string>("FullTime_PartTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HaveYouEverBeenConvictedOfACriminalOﬀence")
+                    b.Property<string>("HaveYouEverBeenConvictedOfACriminalOffence")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Home")
@@ -165,6 +196,9 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Property<string>("HowDidYouHearAboutThePost")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IdNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IfNo_PleaseSpecifyPreferredAreas")
                         .HasColumnType("nvarchar(max)");
 
@@ -175,6 +209,9 @@ namespace ChoosenCareHome.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IfYes_WouldYouLike_LongOrShort_Assignments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Indian")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LightHousework")
@@ -273,6 +310,9 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Property<string>("UseOfWalkingAids")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("WashingPersonalLaundry")
                         .HasColumnType("nvarchar(max)");
 
@@ -283,6 +323,8 @@ namespace ChoosenCareHome.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Applications");
                 });
@@ -384,6 +426,30 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Documents", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ApplicationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.ToTable("Documents");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.EmploymentHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -450,6 +516,37 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("HealthQualifications");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("All")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Read")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.NewsBlog", b =>
                 {
                     b.Property<int>("Id")
@@ -502,6 +599,98 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("OccupationalHealthAssessments");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Profile", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ChangePass")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("UserStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Qualification", b =>
                 {
                     b.Property<int>("Id")
@@ -532,6 +721,48 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("Qualifications");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.TimeSheet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Break")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("PostCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("RatePerHour")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Report")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TimeSheets");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Vacination", b =>
                 {
                     b.Property<int>("Id")
@@ -559,33 +790,6 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("Vacinations");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -609,71 +813,6 @@ namespace ChoosenCareHome.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -704,12 +843,10 @@ namespace ChoosenCareHome.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -746,12 +883,10 @@ namespace ChoosenCareHome.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -761,6 +896,15 @@ namespace ChoosenCareHome.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Application", b =>
+                {
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.ApplicationReference", b =>
                 {
                     b.HasOne("ChoosenCareHome.Data.Model.Application", "Application")
@@ -768,6 +912,13 @@ namespace ChoosenCareHome.Data.Migrations
                         .HasForeignKey("ApplicationId");
 
                     b.Navigation("Application");
+                });
+
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Documents", b =>
+                {
+                    b.HasOne("ChoosenCareHome.Data.Model.Application", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("ApplicationId");
                 });
 
             modelBuilder.Entity("ChoosenCareHome.Data.Model.EmploymentHistory", b =>
@@ -788,6 +939,15 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Navigation("Application");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.Message", b =>
+                {
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.OccupationalHealthAssessment", b =>
                 {
                     b.HasOne("ChoosenCareHome.Data.Model.Application", "Application")
@@ -806,6 +966,15 @@ namespace ChoosenCareHome.Data.Migrations
                     b.Navigation("Application");
                 });
 
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.TimeSheet", b =>
+                {
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Vacination", b =>
                 {
                     b.HasOne("ChoosenCareHome.Data.Model.Application", "Application")
@@ -817,7 +986,7 @@ namespace ChoosenCareHome.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -826,7 +995,7 @@ namespace ChoosenCareHome.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -835,7 +1004,7 @@ namespace ChoosenCareHome.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -844,13 +1013,13 @@ namespace ChoosenCareHome.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -859,7 +1028,7 @@ namespace ChoosenCareHome.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ChoosenCareHome.Data.Model.Profile", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -869,6 +1038,8 @@ namespace ChoosenCareHome.Data.Migrations
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Application", b =>
                 {
                     b.Navigation("ApplicationReferences");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("EmploymentHistories");
 

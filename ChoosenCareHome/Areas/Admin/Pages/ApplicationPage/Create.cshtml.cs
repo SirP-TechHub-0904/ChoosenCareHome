@@ -21,6 +21,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
 
         public IActionResult OnGet()
         {
+        ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 

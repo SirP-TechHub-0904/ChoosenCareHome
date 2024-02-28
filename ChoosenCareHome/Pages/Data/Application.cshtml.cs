@@ -1,6 +1,7 @@
 using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChoosenCareHome.Pages.Data
 {
@@ -25,15 +26,20 @@ namespace ChoosenCareHome.Pages.Data
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Applications == null || Application == null)
-            {
-                return Page();
-            }
+            
 
             _context.Applications.Add(Application);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./BookAppointment", new {id = Application.Id});
+            var getap = await _context.Applications.FindAsync(Application.Id);
+            if (getap != null)
+            {
+                getap.IdNumber = "CHC-01"+Application.Id.ToString("0000");
+                _context.Attach(getap).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./QualificationPage", new {id = Application.Id});
         }
     }
 

@@ -1,7 +1,7 @@
 using ChoosenCareHome.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -10,17 +10,17 @@ namespace ChoosenCareHome.Pages
 {
      public class ReadonlyModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _role;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<Profile> _signInManager;
+        private readonly RoleManager<AppRole> _role;
+        private readonly UserManager<Profile> _userManager;
         private readonly ILogger<ReadonlyModel> _logger;
          private readonly ApplicationDbContext _context;
 
 
         public ReadonlyModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> role,
+            UserManager<Profile> userManager,
+            SignInManager<Profile> signInManager,
+            RoleManager<AppRole> role,
         ILogger<ReadonlyModel> logger,
             ApplicationDbContext context )
         {
@@ -66,7 +66,7 @@ namespace ChoosenCareHome.Pages
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new Profile
                 {
                     UserName = "info@chosenhealthcare.co.uk",
                     Email = "info@chosenhealthcare.co.uk",
@@ -81,13 +81,13 @@ namespace ChoosenCareHome.Pages
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    IdentityRole JAdmin = new IdentityRole("Admin");
-                    var checkJAdmin = await _role.FindByNameAsync("Admin");
-                    if (checkJAdmin == null)
-                    {
-                        await _role.CreateAsync(JAdmin);
+                    //IdentityRole JAdmin = new IdentityRole("Admin");
+                    //var checkJAdmin = await _role.FindByNameAsync("Admin");
+                    //if (checkJAdmin == null)
+                    //{
+                    //    await _role.CreateAsync(JAdmin);
 
-                    }
+                    //}
 
                     await _userManager.AddToRoleAsync(user, "Admin");
                     

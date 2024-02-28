@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.ValueContentAnalysis;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -18,6 +19,7 @@ namespace ChoosenCareHome.Data.Model
 
         [Display(Name = "Surname")]
         public string? Surname { get; set; }
+        public string? IdNumber { get; set; }
 
         [Display(Name = "Date Of Birth")]
         public string? DateOfBirth { get; set; }
@@ -35,7 +37,8 @@ namespace ChoosenCareHome.Data.Model
         public string? Mobile { get; set; }
         [Display(Name = "E-Mail")]
         public string? EMail { get; set; }
-
+        public string? UserId { get; set; }
+        public Profile User { get; set; }
         [Display(Name = "Marital Status")]
         public string? MaritalStatus { get; set; }
 
@@ -59,6 +62,9 @@ namespace ChoosenCareHome.Data.Model
         public ICollection<EmploymentHistory> EmploymentHistories { get; set; }
         public ICollection<ApplicationReference> ApplicationReferences { get; set; }
         public ICollection<OccupationalHealthAssessment> OccupationalHealthAssessments { get; set; }
+        public ICollection<Documents> Documents { get; set; }
+        public ICollection<Vacination> Vacination { get; set; }
+        public ICollection<HealthQualification> HealthQualifications { get; set; }
         [Display(Name = "Doctor Name")]
         public string? DoctorName { get; set; }
         [Display(Name = "Doctor Address")]
@@ -181,8 +187,10 @@ namespace ChoosenCareHome.Data.Model
         public string? EthnicOriginBlackAfrican { get; set; }
         [Display(Name = "Black Caribbean")]
         public string? EthnicOriginBlackCaribbean { get; set; }
-        [Display(Name = "Black Other Indian")]
-        public string? EthnicOriginBlackOtherIndian { get; set; }
+        [Display(Name = "Black Other")]
+        public string? EthnicOriginBlackOther { get; set; }
+        [Display(Name = "Indian")]
+        public string? Indian { get; set; }
         [Display(Name = "Pakistani")]
         public string? EthnicOriginPakistani { get; set; }
         [Display(Name = "Chinese")]
@@ -197,7 +205,7 @@ namespace ChoosenCareHome.Data.Model
         public string? AreYouRelatedOrDoYouKnowAnyMemberOfStaffAtChosenHealthcare { get; set; }
 
         [Display(Name = "Have You Ever Been Convicted Of A Criminal Oﬀence? ")]
-        public string? HaveYouEverBeenConvictedOfACriminalOﬀence { get; set; }
+        public string? HaveYouEverBeenConvictedOfACriminalOffence { get; set; }
         [Display(Name = "If Yes, Please Give Details Of All Convictions And Cautions, Including Spent Convictions And Cautions: (Please Use A Separate Sheet If Necessary)")]
         public string? IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions { get; set; }
 

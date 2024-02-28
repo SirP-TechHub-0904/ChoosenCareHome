@@ -25,7 +25,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
         {
             if (_context.Applications != null)
             {
-                Application = await _context.Applications.ToListAsync();
+                Application = await _context.Applications
+                .Include(a => a.User).ToListAsync();
             }
         }
     }

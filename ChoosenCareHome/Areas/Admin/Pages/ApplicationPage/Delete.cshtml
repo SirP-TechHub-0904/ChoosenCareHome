@@ -37,6 +37,12 @@
             @Html.DisplayFor(model => model.Application.Surname)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.IdNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.IdNumber)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Application.DateOfBirth)
         </dt>
         <dd class="col-sm-10">
@@ -77,6 +83,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Application.EMail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.User.Id)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Application.MaritalStatus)
@@ -463,10 +475,16 @@
             @Html.DisplayFor(model => model.Application.EthnicOriginBlackCaribbean)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Application.EthnicOriginBlackOtherIndian)
+            @Html.DisplayNameFor(model => model.Application.EthnicOriginBlackOther)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Application.EthnicOriginBlackOtherIndian)
+            @Html.DisplayFor(model => model.Application.EthnicOriginBlackOther)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Application.Indian)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.Indian)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Application.EthnicOriginPakistani)
@@ -499,10 +517,10 @@
             @Html.DisplayFor(model => model.Application.AreYouRelatedOrDoYouKnowAnyMemberOfStaffAtChosenHealthcare)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOﬀence)
+            @Html.DisplayNameFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOffence)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOﬀence)
+            @Html.DisplayFor(model => model.Application.HaveYouEverBeenConvictedOfACriminalOffence)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions)

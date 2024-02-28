@@ -36,6 +36,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
                 return NotFound();
             }
             Application = application;
+           ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 
