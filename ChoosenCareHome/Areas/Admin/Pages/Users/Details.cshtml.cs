@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.Users
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class DetailsModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;

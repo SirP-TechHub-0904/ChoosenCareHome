@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ChoosenCareHome.Data;
 using ChoosenCareHome.Data.Model;
+//using Microsoft.AspNetCore.Authorization;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class IndexModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;

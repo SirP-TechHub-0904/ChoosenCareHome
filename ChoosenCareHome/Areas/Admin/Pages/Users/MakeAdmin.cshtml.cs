@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.Users
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class MakeAdminModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
@@ -54,7 +56,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.Users
                 if(user.Role == "Admin")
                 {
                     await _userManager.RemoveFromRoleAsync(user, "Admin");
-                    user.Role = "";
+                    user.Role = "CareGiver";
                     await _userManager.UpdateAsync(user);
                 }
                 else

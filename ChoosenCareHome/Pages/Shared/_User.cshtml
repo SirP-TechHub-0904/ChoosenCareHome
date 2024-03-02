@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Admin - Choosen Health Care - we prioritize the well-being and comfort of our clients</title>
+    <title>Staff - Choosen Health Care - we prioritize the well-being and comfort of our clients</title>
     <link rel="icon" href="~/img/chosen-logo.png" type="image/x-icon" />
 
 
@@ -36,9 +36,10 @@
         .btn {
             margin-top: 10px !important;
             background-color: #719949 !important;
-            color:white !important;
-            margin:5px;
+            color: white !important;
+            margin: 5px;
         }
+
         label {
             margin-top: 20px;
         }
@@ -176,47 +177,25 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " asp-page="/Dashboard/Index" asp-area="Admin">
+                <a class="nav-link " asp-page="/Dashboard/Index" asp-area="Staff">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " asp-page="/TimeSheetPage/Index" asp-area="Admin">
+                <a class="nav-link " asp-page="/Dashboard/TimeSheet" asp-area="Staff">
                     <i class="bi bi-grid"></i>
                     <span>Time Sheet</span>
                 </a>
             </li>
+         
             <li class="nav-item">
-                <a class="nav-link " asp-page="/Users/Index" asp-area="Admin">
-                    <i class="bi bi-grid"></i>
-                    <span>Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " asp-page="/ApplicationPage/Index" asp-area="Admin">
-                    <i class="bi bi-grid"></i>
-                    <span>Applications</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " asp-page="/AppointmentPage/Index" asp-area="Admin">
-                    <i class="bi bi-grid"></i>
-                    <span>Appointment</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " asp-page="/MessagesPage/Index" asp-area="Admin">
+                <a class="nav-link " asp-page="/Dashboard/MessagePage" asp-area="Staff">
                     <i class="bi bi-grid"></i>
                     <span>Messages</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " asp-page="/NewsBlogPage/Index" asp-area="Admin">
-                    <i class="bi bi-grid"></i>
-                    <span>News Blog</span>
-                </a>
-            </li>
+          
 
         </ul>
 

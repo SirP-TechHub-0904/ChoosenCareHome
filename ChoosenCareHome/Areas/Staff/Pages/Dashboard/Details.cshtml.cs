@@ -1,17 +1,18 @@
 using ChoosenCareHome.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
+namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+    [Authorize]
 
-    public class SheetDetailsModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
 
-        public SheetDetailsModel(ChoosenCareHome.Data.ApplicationDbContext context)
+        public DetailsModel(ChoosenCareHome.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,7 +28,6 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
             var usertimesheet = await _context.UserTimeSheets
                 .Include(x=>x.TimeSheet)
-                .Include(x=>x.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usertimesheet == null)
             {

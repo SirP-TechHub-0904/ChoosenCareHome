@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.Dashboard
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class IndexModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;

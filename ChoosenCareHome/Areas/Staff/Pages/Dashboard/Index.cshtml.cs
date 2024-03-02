@@ -1,13 +1,13 @@
 using ChoosenCareHome.Data.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChoosenCareHome.Areas.Admin.Pages.Users
+namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
-
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
@@ -19,13 +19,16 @@ namespace ChoosenCareHome.Areas.Admin.Pages.Users
             _userManager = userManager;
         }
 
-        public List<Profile> AppUser { get; set; } 
+        public int TimeSheet { get; set; }
+        public int Messages { get; set; }
 
         public async Task OnGetAsync()
         {
+            var user = await _userManager.GetUserAsync(User);
 
-            AppUser = await _userManager.Users.Where(x=>x.Email != "info@chosenhealthcare.co.uk").ToListAsync();
-            
+            TimeSheet = await _context.UserTimeSheets.Where(x=>x.UserId == user.Id).CountAsync();
+            Messages = await _context.Messages.Where(x => x.UserId == user.Id & x.Read == false).CountAsync();
+
         }
     }
 }

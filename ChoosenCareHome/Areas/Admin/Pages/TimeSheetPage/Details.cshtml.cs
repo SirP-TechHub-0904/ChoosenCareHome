@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class DetailsModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
@@ -57,7 +59,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
         public async Task<IActionResult> OnPostAsync()
         {
             
-
+            UserTimeSheet.Date = DateTime.UtcNow.AddHours(1);
             _context.UserTimeSheets.Add(UserTimeSheet);
             await _context.SaveChangesAsync();
             TempData["success"] = "successful";

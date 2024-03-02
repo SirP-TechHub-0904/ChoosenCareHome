@@ -11,6 +11,8 @@ using ChoosenCareHome.Data.Model;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class EditModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;

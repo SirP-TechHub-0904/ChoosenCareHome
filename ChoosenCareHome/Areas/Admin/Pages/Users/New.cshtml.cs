@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.Users
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class NewModel : PageModel
     {
         private readonly SignInManager<Profile> _signInManager;

@@ -70,22 +70,31 @@
                                 @Html.DisplayFor(modelItem => item.UserStatus)
                             </td>
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success">Action</button>
+                                
+                                <div class="dropdown">
 
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-success dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                        </button>
-                                        <div class="dropdown-menu" style="">
+                                    <button class="btn btn-success" href="#" data-bs-toggle="dropdown">
+                                         Action
+                                    </button><!-- End Messages Icon -->
 
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+
+                                        <li>
                                             <a class="dropdown-item" asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                                            @*<a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>*@
+
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-page="./Update" asp-route-id="@item.Id">Update</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-page="./ResetPassword" asp-route-id="@item.Id">Reset Password</a>
+                                        </li>
+                                        <li>
                                             <a class="dropdown-item" asp-page="./MakeAdmin" asp-route-id="@item.Id">Make Admin</a>
+                                        </li>
+                                    </ul><!-- End Messages Dropdown Items -->
 
-                                        </div>
-                                    </div>
                                 </div>
-
                             </td>
 
                         </tr>

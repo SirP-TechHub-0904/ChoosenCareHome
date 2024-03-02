@@ -123,10 +123,11 @@ namespace ChoosenCareHome.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User logged in.");
 
-                        if (user.ChangePass == true)
-                        {
-                            return RedirectToPage("/Account/Manage/ChangePassword", new { area = "Identity" });
-                        }
+                        
+
+
+
+                      
 
                         var admin = await _userManager.IsInRoleAsync(user, "Admin");
                         if (admin.Equals(true))
@@ -136,8 +137,18 @@ namespace ChoosenCareHome.Areas.Identity.Pages.Account
                         else
                         {
 
+                            if (user.UserStatus != Data.Model.Enum.UserStatus.Active)
+                            {
+                                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+                            }
+                             
+                            if (user.ChangePass == true)
+                            {
+                                return RedirectToPage("/Account/Manage/ChangePassword", new { area = "Identity" });
+                            }
+                            return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
                         }
-                        return LocalRedirect(returnUrl);
+                        //return LocalRedirect(returnUrl);
                     }
                     else
                     {

@@ -22,7 +22,7 @@
 @foreach (var item in Model.TimeSheet) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @item.Date.ToString("ddd dd MMM, yyyy")
             </td>
             <td>
                 @item.UserTimeSheet.Count()

@@ -10,6 +10,8 @@ using ChoosenCareHome.Data.Model;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class DeleteModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
@@ -54,7 +56,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             {
                 TimeSheet = timesheet;
                 _context.TimeSheets.Remove(TimeSheet);
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

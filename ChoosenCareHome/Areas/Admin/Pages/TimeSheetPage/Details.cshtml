@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.TimeSheet.UserTimeSheet)
+                @foreach (var item in Model.TimeSheet.UserTimeSheet.OrderByDescending(x => x.Date))
                 {
                     <tr>
                         <td>
@@ -58,10 +58,10 @@
                             @Html.DisplayFor(modelItem => item.User.PhoneNumber)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.StartTime)
+                            @item.StartTime.ToString(@"hh\:mm")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EndTime)
+                            @item.EndTime.ToString(@"hh\:mm")
                         </td>
 
                         <td>

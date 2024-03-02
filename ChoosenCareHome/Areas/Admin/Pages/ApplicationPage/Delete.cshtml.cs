@@ -10,6 +10,8 @@ using ChoosenCareHome.Data.Model;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "Admin")]
+
     public class DeleteModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;

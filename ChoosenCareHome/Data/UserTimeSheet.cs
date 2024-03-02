@@ -7,7 +7,7 @@ namespace ChoosenCareHome.Data
         public int Id { get; set; }
         public string? UserId { get; set; }
         public Profile User { get; set; }
-
+        public DateTime Date { get; set; }
         public TimeSpan StartTime { get; set; } // Represents the start time of work
         public TimeSpan EndTime { get; set; }   // Represents the end time of work
         public string? Report { get; set; }
