@@ -25,7 +25,9 @@ namespace ChoosenCareHome.Areas.Admin.Pages.MessagesPage
         {
             if (_context.Messages != null)
             {
-                Message = await _context.Messages.ToListAsync();
+                Message = await _context.Messages
+                    .Include(x=>x.User).OrderByDescending(x => x.Date)
+                    .ToListAsync();
             }
         }
     }

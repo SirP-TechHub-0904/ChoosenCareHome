@@ -9,5 +9,7 @@
         public string? Description { get; set; }
         public bool All { get; set; }
         public bool Read { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

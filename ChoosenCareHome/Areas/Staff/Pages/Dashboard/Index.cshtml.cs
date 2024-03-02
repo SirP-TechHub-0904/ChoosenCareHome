@@ -27,7 +27,7 @@ namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
             var user = await _userManager.GetUserAsync(User);
 
             TimeSheet = await _context.UserTimeSheets.Where(x=>x.UserId == user.Id).CountAsync();
-            Messages = await _context.Messages.Where(x => x.UserId == user.Id & x.Read == false).CountAsync();
+            Messages = await _context.Messages.Where(x => x.UserId == user.Id || x.All == true & x.Read == false).CountAsync();
 
         }
     }

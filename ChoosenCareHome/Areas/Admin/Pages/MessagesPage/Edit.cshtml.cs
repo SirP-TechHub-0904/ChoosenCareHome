@@ -36,6 +36,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.MessagesPage
                 return NotFound();
             }
             Message = message;
+            ViewData["UserId"] = new SelectList(_context.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk"), "Id", "Email");
+
             return Page();
         }
 
@@ -43,11 +45,10 @@ namespace ChoosenCareHome.Areas.Admin.Pages.MessagesPage
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (Message.UserId == "All")
             {
-                return Page();
+                Message.All = true;
             }
-
             _context.Attach(Message).State = EntityState.Modified;
 
             try

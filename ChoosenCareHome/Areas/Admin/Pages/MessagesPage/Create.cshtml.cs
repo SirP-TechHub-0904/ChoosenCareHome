@@ -19,8 +19,10 @@ namespace ChoosenCareHome.Areas.Admin.Pages.MessagesPage
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            ViewData["UserId"] = new SelectList(_context.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk"), "Id", "Email");
+
             return Page();
         }
 
@@ -31,11 +33,13 @@ namespace ChoosenCareHome.Areas.Admin.Pages.MessagesPage
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Messages == null || Message == null)
+          if(Message.UserId == "All")
             {
-                return Page();
+                Message.All = true;
+                Message.UserId = null;
             }
-
+           
+          Message.Date = DateTime.UtcNow.AddHours(1);
             _context.Messages.Add(Message);
             await _context.SaveChangesAsync();
 
