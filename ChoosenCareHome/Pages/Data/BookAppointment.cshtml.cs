@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ChoosenCareHome.Pages.Data
 {
-         public class BookAppointmentModel : PageModel
+    public class BookAppointmentModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
 

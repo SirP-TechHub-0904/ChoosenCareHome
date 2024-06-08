@@ -14,11 +14,11 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Application.Id" />
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Application.Title" class="control-label"></label>
                 <input asp-for="Application.Title" class="form-control" />
                 <span asp-validation-for="Application.Title" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Application.FirstName" class="control-label"></label>
                 <input asp-for="Application.FirstName" class="form-control" />
@@ -39,12 +39,12 @@
                 <input asp-for="Application.IdNumber" class="form-control" />
                 <span asp-validation-for="Application.IdNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Application.DateOfBirth" class="control-label"></label>
                 <input asp-for="Application.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Application.DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>*@
+            @*<div class="form-group">
                 <label asp-for="Application.NationalInsNo" class="control-label"></label>
                 <input asp-for="Application.NationalInsNo" class="form-control" />
                 <span asp-validation-for="Application.NationalInsNo" class="text-danger"></span>
@@ -68,7 +68,7 @@
                 <label asp-for="Application.Mobile" class="control-label"></label>
                 <input asp-for="Application.Mobile" class="form-control" />
                 <span asp-validation-for="Application.Mobile" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Application.EMail" class="control-label"></label>
                 <input asp-for="Application.EMail" class="form-control" />
@@ -79,7 +79,7 @@
                 <select asp-for="Application.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="Application.UserId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Application.MaritalStatus" class="control-label"></label>
                 <input asp-for="Application.MaritalStatus" class="form-control" />
                 <span asp-validation-for="Application.MaritalStatus" class="text-danger"></span>
@@ -93,13 +93,13 @@
                 <label asp-for="Application.Relationship" class="control-label"></label>
                 <input asp-for="Application.Relationship" class="form-control" />
                 <span asp-validation-for="Application.Relationship" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Application.PhoneNumber" class="control-label"></label>
                 <input asp-for="Application.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Application.PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Application.DoYouHavePermissionToWorkInTheUk" class="control-label"></label>
                 <input asp-for="Application.DoYouHavePermissionToWorkInTheUk" class="form-control" />
                 <span asp-validation-for="Application.DoYouHavePermissionToWorkInTheUk" class="text-danger"></span>
@@ -443,7 +443,7 @@
                 <label asp-for="Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions" class="control-label"></label>
                 <input asp-for="Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions" class="form-control" />
                 <span asp-validation-for="Application.IfYesPleaseGiveDetailsOfAllConvictionsAndCautionsIncludingSpentConvictionsAndCautions" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
