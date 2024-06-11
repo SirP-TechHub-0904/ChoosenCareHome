@@ -31,7 +31,7 @@
             @Html.DisplayNameFor(model => model.UserTimeSheet.Report)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserTimeSheet.Report)
+            @Html.Raw(Model.UserTimeSheet.Report)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.UserTimeSheet.Address)
@@ -64,4 +64,7 @@
             @Html.DisplayFor(model => model.UserTimeSheet.TimeSheet.Date)
         </dd>
     </dl>
+
+    <a asp-page="./UpdateUserSheet" class="btn btn-warning btn-sm" asp-route-id="@Model.UserTimeSheet.TimeSheet.Id">Update</a>
+
 </div>

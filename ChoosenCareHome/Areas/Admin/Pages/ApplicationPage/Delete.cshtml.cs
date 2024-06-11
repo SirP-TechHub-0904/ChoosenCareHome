@@ -54,11 +54,108 @@ namespace ChoosenCareHome.Areas.Admin.Pages.ApplicationPage
 
             if (application != null)
             {
+
+                //.Include(x => x.Qualifications)
+                //.Include(x => x.EmploymentHistories)
+                //.Include(x => x.ApplicationReferences)
+                //.Include(x => x.OccupationalHealthAssessments)
+                //.Include(x => x.Vacination)
+                //.Include(x => x.HealthQualifications)
+                //.Include(x => x.Documents)
+
+                //delete timesheet
+                var Documents = await _context.Documents.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in Documents)
+                {
+                    var stx = await _context.Documents.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.Documents.Remove(stx);
+
+                    }
+                }
+                var HealthQualifications = await _context.HealthQualifications.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in HealthQualifications)
+                {
+                    var stx = await _context.HealthQualifications.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.HealthQualifications.Remove(stx);
+
+                    }
+                }
+                var Vacination = await _context.Vacinations.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in Vacination)
+                {
+                    var stx = await _context.Vacinations.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.Vacinations.Remove(stx);
+
+                    }
+                }
+                var Qualifications = await _context.Qualifications.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in Qualifications)
+                {
+                    var stx = await _context.Qualifications.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.Qualifications.Remove(stx);
+
+                    }
+                }
+                var EmploymentHistories = await _context.EmploymentHistories.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in EmploymentHistories)
+                {
+                    var stx = await _context.EmploymentHistories.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.EmploymentHistories.Remove(stx);
+
+                    }
+                }
+                //
+                var ApplicationReferences = await _context.ApplicationReferences.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in ApplicationReferences)
+                {
+                    var stx = await _context.ApplicationReferences.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.ApplicationReferences.Remove(stx);
+
+                    }
+                }
+                //
+                var OccupationalHealthAssessments = await _context.OccupationalHealthAssessments.Where(x => x.ApplicationId == application.Id).ToListAsync();
+                foreach (var i in OccupationalHealthAssessments)
+                {
+                    var stx = await _context.OccupationalHealthAssessments.FindAsync(i.Id);
+
+                    if (stx != null)
+                    {
+                        _context.OccupationalHealthAssessments.Remove(stx);
+
+                    }
+                }
+
+
+
+
+
+
+
                 Application = application;
                 _context.Applications.Remove(Application);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); 
+                TempData["success"] = "successful";
             }
-
+            
             return RedirectToPage("./Index");
         }
     }

@@ -31,7 +31,7 @@ namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usertimesheet == null)
             {
-                return NotFound();
+                return RedirectToPage("./TimeSheet");
             }
             else
             {

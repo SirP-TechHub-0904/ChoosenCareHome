@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using ChoosenCareHome.Data;
 using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
+using Microsoft.AspNetCore.Http;
+using System.Data;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 {
@@ -22,22 +25,28 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             _context = context;
         }
 
-      public TimeSheet TimeSheet { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public TimeSheet TimeSheet { get; set; } = default!;
+        public string Date { get; set; }
+        public DateTime DateView { get; set; }
+        public async Task<IActionResult> OnGetAsync(string? date)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Date = date;
+
+            //if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            //{
+            //    return NotFound();
+            //}
+            DateTime xdate = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateView = xdate;
 
             var timesheet = await _context.TimeSheets
                 .Include(x => x.UserTimeSheet).ThenInclude(x => x.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
+.FirstOrDefaultAsync(m => m.Date.Date == xdate.Date);
             if (timesheet == null)
             {
-                return NotFound();
+                TempData["error"] = "Timesheet Not Available";
+                return Page();
             }
             else
             {
@@ -58,12 +67,14 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            
+
             UserTimeSheet.Date = DateTime.UtcNow.AddHours(1);
             _context.UserTimeSheets.Add(UserTimeSheet);
             await _context.SaveChangesAsync();
             TempData["success"] = "successful";
-            return RedirectToPage("./Details", new {id = UserTimeSheet.TimeSheetId});
-        }
+            var timesheet = await _context.TimeSheets.FirstOrDefaultAsync(x=>x.Id == UserTimeSheet.TimeSheetId);
+            return RedirectToPage("./Details", new { date = timesheet.Date.ToString("dd/MM/yyyy") });
+
+         }
     }
 }

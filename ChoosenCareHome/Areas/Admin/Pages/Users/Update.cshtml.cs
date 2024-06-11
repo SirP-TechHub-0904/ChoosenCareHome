@@ -54,7 +54,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.Users
             await _userManager.UpdateAsync(user);
 
             TempData["success"] = "successful";
-            return Page();
+            return RedirectToPage("Index");
         }
 
     }

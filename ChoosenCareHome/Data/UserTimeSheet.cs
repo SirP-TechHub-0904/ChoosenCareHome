@@ -1,4 +1,5 @@
 ﻿using ChoosenCareHome.Data.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace ChoosenCareHome.Data
 {
@@ -13,6 +14,10 @@ namespace ChoosenCareHome.Data
         public string? Report { get; set; }
         public string? Address { get; set; }
         public string? PostCode { get; set; }
+
+
+        [Display(Name = "Rate Per Hour")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal RatePerHour { get; set; }
         public int Break { get; set; }
 

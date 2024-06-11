@@ -22,15 +22,30 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
         }
 
         public IList<TimeSheet> TimeSheet { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public async Task OnGetAsync(int? year, int? month, DateTime? date)
         {
             if (_context.TimeSheets != null)
             {
-                TimeSheet = await _context.TimeSheets
-                    .Include(x=>x.UserTimeSheet)
-                    .ToListAsync();
+               
             }
+
+            if (date.HasValue)
+            {
+                Year = date.Value.Year;
+                Month = date.Value.Month;
+            }
+            else
+            {
+                Year = year ?? DateTime.Now.Year;
+                Month = month ?? DateTime.Now.Month;
+            }
+
+            TimeSheet = await _context.TimeSheets
+                   .Include(x => x.UserTimeSheet)
+                   .Where(x => x.Date.Year == Year && x.Date.Month == Month)
+                   .ToListAsync();
         }
     }
 }
