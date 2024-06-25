@@ -19,5 +19,12 @@ namespace ChoosenCareHome.Data.Model
             [Description("Deleted")]
             Deleted = 6,
         }
-    }
+
+        public enum InvoiceStatus
+        {
+            Pending = 0,
+            Paid = 1,
+            Canceled = 2,
+        }
+        }
 }

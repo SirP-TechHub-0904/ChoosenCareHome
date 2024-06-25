@@ -14,6 +14,7 @@
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="NewsBlog.Id" />
+            <input type="hidden" asp-for="NewsBlog.Image" />
             <div class="form-group">
                 <label asp-for="NewsBlog.Title" class="control-label"></label>
                 <input asp-for="NewsBlog.Title" class="form-control" />

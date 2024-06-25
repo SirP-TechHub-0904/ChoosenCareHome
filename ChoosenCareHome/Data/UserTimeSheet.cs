@@ -23,5 +23,7 @@ namespace ChoosenCareHome.Data
 
         public int? TimeSheetId { get; set; }
         public TimeSheet TimeSheet { get; set; }
+
+        public bool Paid { get; set; }
     }
 }
