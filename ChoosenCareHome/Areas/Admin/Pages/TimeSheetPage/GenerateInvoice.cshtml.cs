@@ -59,6 +59,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 Invoice.TotalHours = Convert.ToDecimal(UserTimeSheets.Sum(uts => (uts.EndTime - uts.StartTime).TotalHours - (uts.Break / 60.0)));
                 Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
                 Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
+                
             }
 
             return Page();

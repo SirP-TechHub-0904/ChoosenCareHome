@@ -50,6 +50,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.Users
             user.Surname = Profile.Surname;
             user.UserStatus = Profile.UserStatus;
             user.PhoneNumber = Profile.PhoneNumber;
+            user.Address = Profile.Address;
+            user.DOB = Profile.DOB; 
 
             await _userManager.UpdateAsync(user);
 

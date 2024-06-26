@@ -23,6 +23,8 @@ namespace ChoosenCareHome.Data.Model
         public string? Role { get; set; }
         public UserStatus UserStatus { get; set; }
          
+        public string? DOB { get; set; }
+        public string? Address { get; set; }
 
         public bool ChangePass { get; set; }
 

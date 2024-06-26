@@ -77,7 +77,13 @@
                             <span asp-validation-for="Invoice.NINumber" class="text-danger"></span>
                         </div>
                     </div>
-
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Invoice.P45" class="control-label"></label>
+                            <input asp-for="Invoice.P45" class="form-control" />
+                            <span asp-validation-for="Invoice.P45" class="text-danger"></span>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label asp-for="Invoice.TaxCode" class="control-label"></label>

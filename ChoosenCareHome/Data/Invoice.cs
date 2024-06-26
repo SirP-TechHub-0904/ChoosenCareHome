@@ -41,10 +41,11 @@ namespace ChoosenCareHome.Data
 
        
         public string? TaxCode { get; set; }
+        public string? P45 { get; set; }
 
 
 
-       
+
         public string? PaymentMethod { get; set; }
     }
 }
