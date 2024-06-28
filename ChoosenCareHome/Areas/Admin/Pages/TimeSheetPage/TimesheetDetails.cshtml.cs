@@ -36,6 +36,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             }
 
             UserTimeSheets = await _context.UserTimeSheets
+                .Include(x=>x.TimeSheet)
                 .Where(uts => uts.UserId == id && uts.Paid == false)
                 .ToListAsync();
 

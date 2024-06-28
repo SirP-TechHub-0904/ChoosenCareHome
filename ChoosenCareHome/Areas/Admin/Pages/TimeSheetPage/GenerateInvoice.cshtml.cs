@@ -56,7 +56,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 Invoice.PeriodStart = UserTimeSheets.Min(uts => uts.Date);
                 Invoice.PeriodEnd = UserTimeSheets.Max(uts => uts.Date);
                 Invoice.Rate = UserTimeSheets.First().RatePerHour; // Assuming the rate is consistent across sheets
-                Invoice.TotalHours = Convert.ToDecimal(UserTimeSheets.Sum(uts => (uts.EndTime - uts.StartTime).TotalHours - (uts.Break / 60.0)));
+                Invoice.TotalHours = Convert.ToDecimal(UserTimeSheets.Sum(uts => (uts.EndTime - uts.StartTime).TotalHours - (uts.Break)));
                 Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
                 Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
                 

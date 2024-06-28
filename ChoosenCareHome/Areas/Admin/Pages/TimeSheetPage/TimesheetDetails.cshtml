@@ -32,10 +32,10 @@
 
                         foreach (var item in Model.UserTimeSheets)
                         {
-                            var totalHours = (item.EndTime - item.StartTime).TotalHours - (item.Break / 60.0);
+                            var totalHours = (item.EndTime - item.StartTime).TotalHours - (item.Break);
                             <tr>
                                 <td>@(++sn)</td>
-                                <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@item.TimeSheet.Date.ToString("yyyy-MM-dd")</td>
                                 <td>@item.StartTime</td>
                                 <td>@item.EndTime</td>
                                 <td>@item.Break</td>
