@@ -25,7 +25,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
         {
 
 
-            if (id == null || _context.Messages == null)
+            if (id == null || _context.Invoices == null)
             {
                 return NotFound();
             }

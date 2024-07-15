@@ -26,8 +26,15 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
         [BindProperty]
         public Invoice Invoice { get; set; }
+        public List<UserListDto> UserList { get; set; }
+        public string MonthYearTitle { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        [BindProperty]
+        public int Year { get; set; }
+
+        [BindProperty]
+        public int Month { get; set; }
+        public async Task<IActionResult> OnGetAsync(string id, int year, int month)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -41,12 +48,14 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 return NotFound();
             }
 
+            Year = year;
+            Month = month;
 
-
-
+            MonthYearTitle = new DateTime(year, month, 1).ToString("MMMM yyyy");
             Fullname = UserProfile.FirstName + " " + UserProfile.Surname;
             UserTimeSheets = await _context.UserTimeSheets
-                .Where(uts => uts.UserId == id && uts.Paid == false)
+                .Where(uts => uts.UserId == id)
+                .Where(x => x.Date.Year == year && x.Date.Month == month)
                 .ToListAsync();
 
 
@@ -59,7 +68,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 Invoice.TotalHours = Convert.ToDecimal(UserTimeSheets.Sum(uts => (uts.EndTime - uts.StartTime).TotalHours - (uts.Break)));
                 Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
                 Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
-                
+
             }
 
             return Page();
@@ -67,20 +76,70 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            try { 
+            var checkinvoice = await _context.Invoices.FirstOrDefaultAsync(x => x.InvoiceDate.Month == DateTime.UtcNow.AddHours(1).Month);
+            if (checkinvoice == null)
+            {
 
-                Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
-                Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
-            Invoice.InvoiceDate = DateTime.UtcNow.AddHours(1);
-            Invoice.InvoiceStatus = Data.Model.Enum.InvoiceStatus.Pending;
-            _context.Invoices.Add(Invoice);
-            await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Invoice", new {id = Invoice.Id});
-            }catch(Exception ex) {
+                try
+                {
 
-                return Page();
+                    Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
+                    Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
+                    Invoice.InvoiceDate = DateTime.UtcNow.AddHours(1);
+                    Invoice.InvoiceStatus = Data.Model.Enum.InvoiceStatus.Pending;
+                    _context.Invoices.Add(Invoice);
+
+                    UserTimeSheets = await _context.UserTimeSheets
+                   .Where(uts => uts.UserId == Invoice.UserId)
+                     .Where(x => x.Date.Year == Year && x.Date.Month == Month)
+                   .ToListAsync();
+                    foreach (var ut in UserTimeSheets)
+                    {
+                        ut.InvoiceNumber = Invoice.Id.ToString("0000");
+                        ut.GeneratedInvoice = true;
+                        _context.Attach(ut).State = EntityState.Modified;
+                    }
+
+
+                    await _context.SaveChangesAsync();
+
+                    var getInvoice = await _context.Invoices.FirstOrDefaultAsync(x => x.Id == Invoice.Id);
+                    getInvoice.InvoiceNumber = Invoice.Id.ToString("0000");
+                    _context.Attach(getInvoice).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return RedirectToPage("./Invoice", new { id = Invoice.Id });
+                }
+                catch (Exception ex)
+                {
+
+                    return Page();
+                }
             }
+            else
+            {
+                checkinvoice.PeriodStart = Invoice.PeriodStart;
+                checkinvoice.PeriodEnd = Invoice.PeriodEnd;
+                checkinvoice.Rate = Invoice.Rate;
+                checkinvoice.TotalHours = Invoice.TotalHours;
+                checkinvoice.TotalPay = Invoice.TotalPay;
+                checkinvoice.NetPay = Invoice.NetPay;
+                checkinvoice.IncomeTax = Invoice.IncomeTax;
+                checkinvoice.NationalInsurance = Invoice.NationalInsurance;
+                checkinvoice.NINumber = Invoice.NINumber;
+                checkinvoice.P45 = Invoice.P45;
+                checkinvoice.TaxCode = Invoice.TaxCode;
+                checkinvoice.PaymentMethod = Invoice.PaymentMethod; 
+
+                checkinvoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
+                checkinvoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
+                checkinvoice.InvoiceDate = DateTime.UtcNow.AddHours(1);
+
+                _context.Attach(checkinvoice).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Invoice", new { id = checkinvoice.Id });
+            }
+
         }
     }
 }

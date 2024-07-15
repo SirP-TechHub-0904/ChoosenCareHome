@@ -19,14 +19,31 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
         }
 
         public List<UserListDto> UserList { get; set; }
+        public string MonthYearTitle { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        [BindProperty(SupportsGet = true)]
+        public int Year { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int Month { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int year, int month)
         {
+            Year = year;
+            Month = month;
+
             var appUsers = await _userManager.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk").ToListAsync();
-            var userTimeSheets = await _context.UserTimeSheets.Where(x => x.Paid == false).ToListAsync();
+            var userTimeSheets = await _context.UserTimeSheets
+                .Where(x => x.Date.Year == year && x.Date.Month == month)
+.ToListAsync();
 
             UserList = await GetUserListAsync(appUsers, userTimeSheets);
-            UserList = UserList.Where(x=>x.TotalSheets > 0).ToList();
+            UserList = UserList.Where(x => x.TotalSheets > 0).ToList();
+            if(year > 0)
+            {
+                MonthYearTitle = new DateTime(year, month, 1).ToString("MMMM yyyy");
+
+            }
             return Page();
         }
 
@@ -42,7 +59,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                     Role = profile.Role,
                     Status = profile.UserStatus.ToString(),
                     UserId = profile.Id,
-                    TotalSheets = userTimeSheets.Count(uts => uts.UserId == profile.Id)
+                    TotalSheets = userTimeSheets.Count(uts => uts.UserId == profile.Id && uts.Date.Year == Year && uts.Date.Month == Month)
+
                 }).ToList();
             });
         }

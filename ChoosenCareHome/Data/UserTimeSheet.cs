@@ -25,5 +25,7 @@ namespace ChoosenCareHome.Data
         public TimeSheet TimeSheet { get; set; }
 
         public bool Paid { get; set; }
+        public bool GeneratedInvoice {  get; set; }
+        public string? InvoiceNumber { get; set; }
     }
 }

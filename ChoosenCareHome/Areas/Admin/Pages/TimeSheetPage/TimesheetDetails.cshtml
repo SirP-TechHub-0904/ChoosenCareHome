@@ -4,9 +4,9 @@
 }
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Timesheet Details for @Model.UserProfile.FirstName @Model.UserProfile.Surname</h3>
+        <h3 class="card-title">Timesheet Details for @Model.UserProfile.FirstName @Model.UserProfile.Surname (@Model.MonthYearTitle) (@Model.UserTimeSheets.Count())</h3>
         <p>
-            <a asp-page="./GenerateInvoice" asp-route-id="@Model.UserProfile.Id" class="btn btn-primary">Print Invoice</a>
+            <a asp-page="./GenerateInvoice" asp-route-id="@Model.UserProfile.Id" asp-route-year="@Model.Year" asp-route-month="@Model.Month" class="btn btn-primary">Print Invoice</a>
         </p>
     </div>
     <div class="card-body">

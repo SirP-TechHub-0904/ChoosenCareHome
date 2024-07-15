@@ -7,6 +7,7 @@ namespace ChoosenCareHome.Data
     public class Invoice
     {
         public int Id { get; set; }
+        public string? InvoiceNumber { get; set; }
         public DateTime InvoiceDate { get; set; }
         public InvoiceStatus InvoiceStatus { get; set; }
        public string UserId {  get; set; }
@@ -43,7 +44,7 @@ namespace ChoosenCareHome.Data
         public string? TaxCode { get; set; }
         public string? P45 { get; set; }
 
-
+     
 
 
         public string? PaymentMethod { get; set; }
