@@ -22,6 +22,7 @@ namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
         }
 
         public IList<UserTimeSheet> TimeSheet { get; set; }
+        public List<UserTimeSheet> PendingTimeSheet { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public async Task OnGetAsync(int? year, int? month, DateTime? date)
@@ -44,7 +45,11 @@ namespace ChoosenCareHome.Areas.Staff.Pages.Dashboard
                 .Include(x => x.TimeSheet)
                  .Where(x => x.TimeSheet.Date.Year == Year && x.TimeSheet.Date.Month == Month)
                 .Where(x => x.UserId == user.Id).ToListAsync();
- 
+
+            PendingTimeSheet = await _context.UserTimeSheets
+              .Include(x => x.TimeSheet)
+               .Where(x => x.UserId == null).ToListAsync();
+
         }
     }
 }

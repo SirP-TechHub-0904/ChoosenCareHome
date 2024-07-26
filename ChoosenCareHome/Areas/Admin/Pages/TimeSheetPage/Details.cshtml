@@ -17,7 +17,7 @@
         <strong>Warning!</strong> @TempData["error"]
     </div>
 
-    
+
 }
 else
 {
@@ -49,6 +49,10 @@ else
                             Post Code
                         </th>
 
+                        <th>Acceptance status</th>
+                        <th>Acceptance Countdown</th>
+                        <th>User Start Time</th>
+                        <th>User End Time</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -78,7 +82,72 @@ else
                             <td>
                                 @Html.DisplayFor(modelItem => item.PostCode)
                             </td>
+                            <td>
+                                @if (item.TimesheetAcceptance == ChoosenCareHome.Data.Model.Enum.TimesheetAcceptance.Accepted)
+                                {
 
+
+                                    <span>Accepted</span>
+                                }
+                                else if (item.TimesheetAcceptance == ChoosenCareHome.Data.Model.Enum.TimesheetAcceptance.Declined)
+                                {
+                                    <span>Declined</span>
+                                    <span>
+                                        <br />  @item.AcceptedReason
+                                    </span>
+                                }
+                                else if (item.TimesheetAcceptance == ChoosenCareHome.Data.Model.Enum.TimesheetAcceptance.Canceled)
+                                {
+                                    <span>Canceled</span>
+                                    <span>
+                                        <br /> @item.AcceptedReason
+                                    </span>
+                                }
+                                else if (item.TimesheetAcceptance == ChoosenCareHome.Data.Model.Enum.TimesheetAcceptance.Pending)
+                                {
+                                    <span>Pending</span>
+
+                                }
+                            </td>
+                            @{
+                                // Calculate remaining hours for each item
+                                DateTime now = DateTime.UtcNow; // Get current time in UTC
+                                TimeSpan remainingTime = item.AcceptanceExpirationTime - now;
+                                int remainingHours = (int)Math.Ceiling(remainingTime.TotalHours); // Calculate remaining hours
+
+                                // Ensure remaining hours is not negative
+                                if (remainingHours < 0)
+                                {
+                                    remainingHours = 0;
+                                }
+                                // Determine whether to display "hr" or "hrs"
+                                string hoursLabel = remainingHours == 1 ? "hr" : "hrs";
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AcceptanceExpirationTime)  (@remainingHours@hoursLabel)
+                            </td>
+                            <td>
+                                @if (item.UserSheetStartTime != null)
+                                {
+
+                                    @item.UserSheetStartTime.Value
+                                }
+                                else
+                                {
+                                    <span>--/--/-- --:--</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.UserSheetEndTime != null)
+                                {
+
+                                    @item.UserSheetEndTime.Value
+                                }
+                                else
+                                {
+                                    <span>--/--/-- --:--</span>
+                                }
+                            </td>
                             <td>
                                 <a asp-page="./SheetDetails" class="btn btn-primary btn-sm" asp-route-id="@item.Id">Details</a>
                                 <a asp-page="./UpdateUserSheet" class="btn btn-warning btn-sm" asp-route-id="@item.Id">Update</a>
@@ -102,7 +171,7 @@ else
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="UserTimeSheet.UserId" class="control-label">User</label>
+                        <label asp-for="UserTimeSheet.UserId" class="control-label">User (Leave Use Blank if it not assigned to a user)</label>
                         <select asp-for="UserTimeSheet.UserId" class="form-control" asp-items="ViewBag.UserId">
                             <option value="">Choose</option>
                         </select>
@@ -125,9 +194,13 @@ else
                     </div>
                     <div class="form-group">
                         <label asp-for="UserTimeSheet.PostCode" class="control-label">Post Code</label>
-                        <input asp-for="UserTimeSheet.PostCode" class="form-control" />
+                        <select asp-for="UserTimeSheet.PostCode" class="form-control" asp-items="ViewBag.UserClientId" required="required">
+                            <option value="">Choose</option>
+                        </select>
                         <span asp-validation-for="UserTimeSheet.PostCode" class="text-danger"></span>
                     </div>
+
+
                     <div class="form-group">
                         <label asp-for="UserTimeSheet.RatePerHour" class="control-label">Rate Per Hour in Pounds (£)</label>
                         <input asp-for="UserTimeSheet.RatePerHour" class="form-control" value="10" />
@@ -137,6 +210,11 @@ else
                         <label asp-for="UserTimeSheet.Break" class="control-label"></label>
                         <input asp-for="UserTimeSheet.Break" class="form-control" />
                         <span asp-validation-for="UserTimeSheet.Break" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserTimeSheet.AcceptanceExpirationTime" class="control-label">Acceptance Expiration Time</label>
+                        <input asp-for="UserTimeSheet.AcceptanceExpirationTime" class="form-control" />
+                        <span asp-validation-for="UserTimeSheet.AcceptanceExpirationTime" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
@@ -148,3 +226,7 @@ else
     </div>
 }
 <a asp-page="./Index">Back to List</a>
+
+@section scripts {
+   
+}

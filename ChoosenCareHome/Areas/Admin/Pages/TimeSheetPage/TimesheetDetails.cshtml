@@ -35,7 +35,7 @@
                             var totalHours = (item.EndTime - item.StartTime).TotalHours - (item.Break);
                             <tr>
                                 <td>@(++sn)</td>
-                                <td>@item.TimeSheet.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@item.TimeSheet.Date.ToString("ddd dd MMM, yyyy")</td>
                                 <td>@item.StartTime</td>
                                 <td>@item.EndTime</td>
                                 <td>@item.Break</td>

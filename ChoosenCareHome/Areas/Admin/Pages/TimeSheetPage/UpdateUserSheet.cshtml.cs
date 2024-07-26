@@ -2,6 +2,7 @@ using ChoosenCareHome.Data;
 using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
@@ -38,6 +39,16 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             {
                 UserTimeSheet = usertimesheet;
             }
+
+            ViewData["UserId"] = new SelectList(_context.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk"), "Id", "Email");
+
+            var userClients = _context.UserRotas.Select(x => new UserClientDropdownDto
+            {
+                Id = x.PostCode,
+                DisplayName = $"{x.Name} {x.PostCode}" // Combine Name and PostCode
+            }).ToList();
+            ViewData["UserClientId"] = new SelectList(userClients, "Id", "DisplayName");
+
             return Page();
         }
 
@@ -58,6 +69,11 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             usertimesheet.PostCode = UserTimeSheet.PostCode;
             usertimesheet.RatePerHour = UserTimeSheet.RatePerHour;
             usertimesheet.Break = UserTimeSheet.Break;
+            usertimesheet.AcceptanceExpirationTime = UserTimeSheet.AcceptanceExpirationTime;
+            usertimesheet.TimesheetAcceptance = UserTimeSheet.TimesheetAcceptance;
+            usertimesheet.AcceptedReason = UserTimeSheet.AcceptedReason;
+            usertimesheet.UserId = UserTimeSheet.UserId;
+            usertimesheet.PostCode = UserTimeSheet.PostCode;
 
 
             _context.Attach(usertimesheet).State = EntityState.Modified;

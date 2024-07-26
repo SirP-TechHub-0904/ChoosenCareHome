@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using System.Data;
+using System.Net.Mail;
+using static ChoosenCareHome.Data.Model.Enum;
+using System.Net;
 
 namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 {
@@ -19,10 +22,12 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
     public class DetailsModel : PageModel
     {
         private readonly ChoosenCareHome.Data.ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnv;
 
-        public DetailsModel(ChoosenCareHome.Data.ApplicationDbContext context)
+        public DetailsModel(ChoosenCareHome.Data.ApplicationDbContext context, IWebHostEnvironment hostingEnv)
         {
             _context = context;
+            _hostingEnv = hostingEnv;
         }
 
         public TimeSheet TimeSheet { get; set; } = default!;
@@ -57,6 +62,13 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
             var excludedUserId = timesheet.UserTimeSheet.FirstOrDefault()?.UserId;
             ViewData["UserId"] = new SelectList(_context.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk" && x.Id != excludedUserId), "Id", "Email");
 
+            var userClients = _context.UserRotas.Select(x => new UserClientDropdownDto
+            {
+                Id = x.PostCode,
+                DisplayName = $"{x.Name} {x.PostCode}" // Combine Name and PostCode
+            }).ToList();
+            ViewData["UserClientId"] = new SelectList(userClients, "Id", "DisplayName");
+
             return Page();
         }
 
@@ -69,12 +81,84 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
         {
 
             UserTimeSheet.Date = DateTime.UtcNow.AddHours(1);
+            if(UserTimeSheet.UserId == null)
+            {
+                UserTimeSheet.TimesheetAcceptance = TimesheetAcceptance.Pending;
+
+            }
+            else
+            {
+                UserTimeSheet.TimesheetAcceptance = TimesheetAcceptance.Accepted;
+
+            }
             _context.UserTimeSheets.Add(UserTimeSheet);
             await _context.SaveChangesAsync();
             TempData["success"] = "successful";
-            var timesheet = await _context.TimeSheets.FirstOrDefaultAsync(x=>x.Id == UserTimeSheet.TimeSheetId);
+            var getuser = await _context.UserTimeSheets
+                .Include(x => x.User)
+                .Include(x => x.TimeSheet)
+                .FirstOrDefaultAsync(x => x.Id == UserTimeSheet.Id);
+
+            if(getuser.UserId != null) {
+            //send email
+            string title = "TimeSheet Update";
+            string msg = $"Your sheet has been created for {UserTimeSheet.TimeSheet.Date.Date} at {UserTimeSheet.PostCode} <br> Time: {UserTimeSheet.StartTime} - {UserTimeSheet.EndTime}";
+           
+            try
+            { 
+                //email
+                StreamReader sr = new StreamReader(System.IO.Path.Combine(_hostingEnv.WebRootPath, "Mail.html"));
+                //create the mail message 
+                MailMessage mail = new MailMessage();
+
+                string mailmsg = sr.ReadToEnd();
+                mailmsg = mailmsg.Replace("{title}", title);
+                mailmsg = mailmsg.Replace("{MESSAGE}", msg);
+                mailmsg = mailmsg.Replace("{name}", getuser.User.Surname + getuser.User.FirstName);
+                mail.Body = mailmsg;
+                sr.Close();
+                MailSystem ms = new MailSystem();
+                ms.Email = getuser.User.Email;
+                ms.Title = title;
+                ms.Mail = mailmsg;
+                ms.Retries = 0; ms.NotificationType = NotificationType.Email; 
+                ms.NotificationStatus = NotificationStatus.NotSent; 
+                _context.MailSystems.Add(ms);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+                 
+            }
+
+            try
+            {
+                //sms
+                 
+                MailSystem ms = new MailSystem();
+                ms.Email = getuser.User.PhoneNumber;
+                ms.Title = title;
+                ms.Mail = msg;
+                ms.Retries = 0; ms.NotificationType = NotificationType.SMS;
+                ms.NotificationStatus = NotificationStatus.NotSent;
+                _context.MailSystems.Add(ms);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception)
+            {
+
+            }
+            }
+            var timesheet = await _context.TimeSheets.FirstOrDefaultAsync(x => x.Id == UserTimeSheet.TimeSheetId);
             return RedirectToPage("./Details", new { date = timesheet.Date.ToString("dd/MM/yyyy") });
 
-         }
+        }
+    }
+    public class UserClientDropdownDto
+    {
+        public string Id { get; set; }
+        public string DisplayName { get; set; }
     }
 }

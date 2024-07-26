@@ -25,6 +25,8 @@ namespace ChoosenCareHome.Data
         public DbSet<TimeSheet> TimeSheets { get; set; }
         public DbSet<UserTimeSheet> UserTimeSheets { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<UserRota> UserRotas { get; set; }
+        public DbSet<MailSystem> MailSystems { get; set; }
 
 
 

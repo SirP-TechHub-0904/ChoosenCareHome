@@ -26,5 +26,36 @@ namespace ChoosenCareHome.Data.Model
             Paid = 1,
             Canceled = 2,
         }
+        public enum TimesheetAcceptance
+        {
+            Pending = 0,
+            Accepted = 1,
+            Canceled = 2,
+            Declined = 3,
         }
+        public enum NotificationStatus
+        {
+            [Description("NotDefind")]
+            NotDefind = 0,
+            [Description("Sent")]
+            Sent = 1,
+
+            [Description("NotSent")]
+            NotSent = 2,
+
+
+        }
+        public enum NotificationType
+        {
+            [Description("NotDefind")]
+            NotDefind = 0,
+            [Description("SMS")]
+            SMS = 1,
+
+            [Description("Email")]
+            Email = 2
+
+
+        }
+    }
 }

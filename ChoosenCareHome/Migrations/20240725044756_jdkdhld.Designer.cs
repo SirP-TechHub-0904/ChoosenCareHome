@@ -4,6 +4,7 @@ using ChoosenCareHome.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChoosenCareHome.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240725044756_jdkdhld")]
+    partial class jdkdhld
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -847,7 +850,7 @@ namespace ChoosenCareHome.Migrations
                     b.ToTable("TimeSheets");
                 });
 
-            modelBuilder.Entity("ChoosenCareHome.Data.Model.UserRota", b =>
+            modelBuilder.Entity("ChoosenCareHome.Data.Model.UserClient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -868,7 +871,7 @@ namespace ChoosenCareHome.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserRotas");
+                    b.ToTable("UserClients");
                 });
 
             modelBuilder.Entity("ChoosenCareHome.Data.Model.Vacination", b =>

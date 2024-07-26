@@ -16,8 +16,13 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserTimeSheet.Id" />
-            
 
+            <div class="form-group">
+                <label asp-for="UserTimeSheet.UserId" class="control-label">User</label>
+                <select asp-for="UserTimeSheet.UserId" class="form-control" asp-items="ViewBag.UserId">
+                    <option value="">Choose</option>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label asp-for="UserTimeSheet.StartTime" class="control-label"></label>
@@ -35,11 +40,7 @@
                 <input asp-for="UserTimeSheet.Address" class="form-control" />
                 <span asp-validation-for="UserTimeSheet.Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="UserTimeSheet.PostCode" class="control-label">Post Code</label>
-                <input asp-for="UserTimeSheet.PostCode" class="form-control" />
-                <span asp-validation-for="UserTimeSheet.PostCode" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="UserTimeSheet.RatePerHour" class="control-label">Rate Per Hour in Pounds</label>
                 <input asp-for="UserTimeSheet.RatePerHour" class="form-control" value="10" />
@@ -50,7 +51,29 @@
                 <input asp-for="UserTimeSheet.Break" class="form-control" />
                 <span asp-validation-for="UserTimeSheet.Break" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="UserTimeSheet.PostCode" class="control-label">Post Code</label>
+                <select asp-for="UserTimeSheet.PostCode" class="form-control" asp-items="ViewBag.UserClientId" required="required">
+                    <option value="">Choose</option>
+                </select>
+                <span asp-validation-for="UserTimeSheet.PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserTimeSheet.TimesheetAcceptance" class="control-label"></label>
+                @Html.DropDownListFor(model => model.UserTimeSheet.TimesheetAcceptance, new SelectList(Enum.GetValues(typeof(ChoosenCareHome.Data.Model.Enum.TimesheetAcceptance))), new { @class = "form-control" })
+                <span asp-validation-for="UserTimeSheet.TimesheetAcceptance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserTimeSheet.AcceptedReason" class="control-label"></label>
+                <textarea asp-for="UserTimeSheet.AcceptedReason" class="form-control"></textarea>
+                <span asp-validation-for="UserTimeSheet.AcceptedReason" class="text-danger"></span>
+            </div>
 
+            <div class="form-group">
+                <label asp-for="UserTimeSheet.AcceptanceExpirationTime" class="control-label">Acceptance Expiration Time</label>
+                <input asp-for="UserTimeSheet.AcceptanceExpirationTime" class="form-control" />
+                <span asp-validation-for="UserTimeSheet.AcceptanceExpirationTime" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
