@@ -53,12 +53,13 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
             MonthYearTitle = new DateTime(year, month, 1).ToString("MMMM yyyy");
             Fullname = UserProfile.FirstName + " " + UserProfile.Surname;
-            UserTimeSheets = await _context.UserTimeSheets
-                .Where(uts => uts.UserId == id)
-                .Where(x => x.Date.Year == year && x.Date.Month == month)
+            UserTimeSheets = await _context.UserTimeSheets.Include(x => x.TimeSheet)
+                .Where(x => x.UserId == id && x.TimeSheet.Date.Year == year && x.TimeSheet.Date.Month == month)
+                 
                 .ToListAsync();
 
 
+            //var totalHours = (item.EndTime - item.StartTime).TotalHours - (item.Break);
             if (UserTimeSheets.Any())
             {
                 Invoice = new Invoice();
@@ -66,10 +67,20 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 Invoice.PeriodEnd = UserTimeSheets.Max(uts => uts.Date);
                 Invoice.Rate = UserTimeSheets.First().RatePerHour; // Assuming the rate is consistent across sheets
                 Invoice.TotalHours = Convert.ToDecimal(UserTimeSheets.Sum(uts => (uts.EndTime - uts.StartTime).TotalHours - (uts.Break)));
+                //Invoice.TotalHours = 0m; // Initialize total hours
+
+                //foreach (var item in UserTimeSheets)
+                //{
+                //    Invoice.TotalHours += Convert.ToDecimal((item.EndTime - item.StartTime).TotalHours) - item.Break;
+                //}
                 Invoice.TotalPay = Invoice.TotalHours * Invoice.Rate;
                 Invoice.NetPay = Invoice.TotalPay - Invoice.IncomeTax - Invoice.NationalInsurance;
 
             }
+
+            //foreach (var invoice in UserTimeSheets) {
+            //    Invoice.TotalHours = Convert.ToDecimal(invoice.EndTime - invoice.StartTime) - (invoice.Break);
+            //}
 
             return Page();
         }
