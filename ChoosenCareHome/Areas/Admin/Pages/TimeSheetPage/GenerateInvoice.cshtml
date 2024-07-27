@@ -7,6 +7,12 @@
 <h4>Generate Invoice</h4>
 <h5>@Model.Fullname (@Model.UserProfile.Email)</h5>
 <hr />
+@if (TempData["error"] != null)
+{
+    <span class="bg-danger">
+        @TempData["error"]
+    </span>
+}
 <div class="row">
     <div class="col-md-12">
         <form method="post">

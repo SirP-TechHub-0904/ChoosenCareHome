@@ -87,7 +87,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var checkinvoice = await _context.Invoices.FirstOrDefaultAsync(x => x.InvoiceDate.Month == DateTime.UtcNow.AddHours(1).Month);
+            var checkinvoice = await _context.Invoices.FirstOrDefaultAsync(x => x.InvoiceDate.Month == DateTime.UtcNow.AddHours(1).Month && 
+            x.UserId == Invoice.UserId);
             if (checkinvoice == null)
             {
 
@@ -100,16 +101,15 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                     Invoice.InvoiceDate = DateTime.UtcNow.AddHours(1);
                     Invoice.InvoiceStatus = Data.Model.Enum.InvoiceStatus.Pending;
                     _context.Invoices.Add(Invoice);
-
-                    UserTimeSheets = await _context.UserTimeSheets
-                   .Where(uts => uts.UserId == Invoice.UserId)
-                     .Where(x => x.Date.Year == Year && x.Date.Month == Month)
-                   .ToListAsync();
-                    foreach (var ut in UserTimeSheets)
+                    await _context.SaveChangesAsync();
+                    var xUserTimeSheets = await _context.UserTimeSheets.AsNoTracking()
+                   .FirstOrDefaultAsync(x => x.UserId == Invoice.UserId && x.TimeSheet.Date.Year == Year && x.TimeSheet.Date.Month == Month);
+                    
+                    if(xUserTimeSheets != null)
                     {
-                        ut.InvoiceNumber = Invoice.Id.ToString("0000");
-                        ut.GeneratedInvoice = true;
-                        _context.Attach(ut).State = EntityState.Modified;
+                        xUserTimeSheets.InvoiceNumber = Invoice.Id.ToString("0000");
+                        xUserTimeSheets.GeneratedInvoice = true;
+                        _context.Attach(xUserTimeSheets).State = EntityState.Modified;
                     }
 
 
@@ -123,7 +123,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                 }
                 catch (Exception ex)
                 {
-
+                    TempData["error"] = "unable to generate invoice. try again";
                     return Page();
                 }
             }

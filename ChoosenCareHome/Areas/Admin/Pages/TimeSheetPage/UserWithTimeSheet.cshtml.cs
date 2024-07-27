@@ -34,7 +34,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
             var appUsers = await _userManager.Users.Where(x => x.Email != "info@chosenhealthcare.co.uk").ToListAsync();
             var userTimeSheets = await _context.UserTimeSheets
-                .Where(x => x.Date.Year == year && x.Date.Month == month)
+                .Include(x=>x.TimeSheet)
+                .Where(x => x.TimeSheet.Date.Year == year && x.TimeSheet.Date.Month == month)
 .ToListAsync();
 
             UserList = await GetUserListAsync(appUsers, userTimeSheets);
@@ -59,7 +60,7 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
                     Role = profile.Role,
                     Status = profile.UserStatus.ToString(),
                     UserId = profile.Id,
-                    TotalSheets = userTimeSheets.Count(uts => uts.UserId == profile.Id && uts.Date.Year == Year && uts.Date.Month == Month)
+                    TotalSheets = userTimeSheets.Count(uts => uts.UserId == profile.Id && uts.TimeSheet.Date.Year == Year && uts.TimeSheet.Date.Month == Month)
 
                 }).ToList();
             });
