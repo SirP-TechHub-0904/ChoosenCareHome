@@ -23,64 +23,27 @@
 </div>
 
 <div class="card">
+    
     <div class="card-header">
         <form method="get">
             <input type="hidden" name="id" value="@Model.UserRota.Id" />
-            <input type="hidden" id="currentYear" name="year" value="@Model.CurrentYear" />
-            <input type="hidden" id="currentWeek" name="week" value="@Model.CurrentWeek" />
 
             <div class="row">
-                <div class="col-md-3">
-                    <label for="year">Year:</label>
-                    <select id="yearSelect" class="form-control" name="year" onchange="updateCurrentYear()">
-                        @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 1; i--)
-                        {
-                            
-                            <option value="@i" selected="@(i == Model.CurrentYear)">@i</option>
-                        }
-                    </select>
+                <div class="col-md-4">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
                 </div>
-                <div class="col-md-3">
-                    <label for="month">Month:</label>
-                    <select id="monthSelect" class="form-control" name="month" onchange="clearWeekAndDay()">
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            <option value="@i" selected="@(i == Model.CurrentMonth)">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
-
-
-                        }
-                    </select>
+                <div class="col-md-4">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
                 </div>
-                <div class="col-md-3">
-                    <label for="week">Week:</label>
-                    <select id="weekSelect" class="form-control" name="week" onchange="clearMonthAndDay()">
-                        @for (int i = 1; i <= 53; i++)
-                        {
-                            <option value="@i" selected="@(i == Model.CurrentWeek)">Week @i</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="day">Day:</label>
-                    <select id="daySelect" class="form-control" name="day" onchange="clearMonthAndWeek()">
-                        @for (int i = 1; i <= 31; i++)
-                        {
-                            <option value="@i" selected="@(i == Model.CurrentDay)">Day @i</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-primary" onclick="adjustWeek(-1)">Previous Week</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-primary" onclick="adjustWeek(1)">Next Week</button>
                 </div>
             </div>
         </form>
     </div>
+
     <div class="card-body">
         <h3 style="text-align:center;font-weight:900;">@Model.DateTitle</h3>
         <table class="table">
@@ -110,11 +73,11 @@
                 }
             </tbody>
         </table>
-   
-    
+
+
         <div class="">
             <a class="btn btn-primary" asp-page="./Index">Back to List</a>
-            <a class="btn btn-primary" asp-page="./PrintRota" asp-route-id="@Model.UserRota.Id" asp-route-day="@Model.RouteDay" asp-route-week="@Model.RouteWeek" asp-route-month="@Model.RouteMonth" asp-route-year="@Model.RouteYear">Print Rota</a>
+            <a class="btn btn-primary" asp-page="./PrintRota" asp-route-id="@Model.UserRota.Id" asp-route-startDate="@Model.StartDate" asp-route-endDate="@Model.EndDate">Print Rota</a>
         </div>
     </div>
 </div>

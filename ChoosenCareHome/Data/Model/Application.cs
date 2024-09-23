@@ -23,7 +23,7 @@ namespace ChoosenCareHome.Data.Model
 
         [Display(Name = "Date Of Birth")]
         public string? DateOfBirth { get; set; }
-
+        public DateTime Date {  get; set; }
         [Display(Name = "National Ins. No.")]
         public string? NationalInsNo { get; set; }
 

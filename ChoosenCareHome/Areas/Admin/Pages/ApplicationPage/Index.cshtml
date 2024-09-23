@@ -19,15 +19,9 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Application[0].Address)
+                @Html.DisplayNameFor(model => model.Application[0].PhoneNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Application[0].Postcode)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Application[0].Mobile)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Application[0].EMail)
             </th>
@@ -53,14 +47,9 @@
                     @Html.DisplayFor(modelItem => item.IdNumber)
                 </td>
 
+               
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Postcode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mobile)
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EMail)

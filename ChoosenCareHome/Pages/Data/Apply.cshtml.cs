@@ -27,7 +27,7 @@ namespace ChoosenCareHome.Pages.Data
         public async Task<IActionResult> OnPostAsync()
         {
 
-
+            Application.Date = DateTime.UtcNow.AddHours(1);
             _context.Applications.Add(Application);
             await _context.SaveChangesAsync();
 
