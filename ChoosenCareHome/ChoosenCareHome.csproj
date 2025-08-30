@@ -12,6 +12,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="appsettings.Development.json" />
+	  <Content Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="wwwroot\slider\revolution\css\.DS_Store" />
 		<None Include="wwwroot\slider\revolution\js\.DS_Store" />
 		<None Include="wwwroot\slider\revolution\js\extensions\.DS_Store" />

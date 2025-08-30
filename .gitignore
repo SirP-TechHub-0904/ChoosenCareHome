@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# ASP.NET Core configuration files
+appsettings.json
+appsettings.*.json
+
+# Secrets folder (if you use dotnet user-secrets)
+secrets.json
+
+# Don’t commit sensitive data
+*.db
+*.db-shm
+*.db-wal
