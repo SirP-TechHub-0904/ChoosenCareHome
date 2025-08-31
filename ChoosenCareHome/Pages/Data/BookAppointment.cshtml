@@ -30,6 +30,11 @@
                         <input asp-for="Appointment.Title" class="form-control" />
                         <span asp-validation-for="Appointment.Title" class="text-danger"></span>
                     </div>
+                    <!-- Honeypot field -->
+                    <div style="display:none">
+                        <label for="HoneyPot">Leave this empty</label>
+                        <input id="HoneyPot" name="HoneyPot" type="text" />
+                    </div>
                     <div class="form-group">
                         <label asp-for="Appointment.FirstName" class="control-label"></label>
                         <input asp-for="Appointment.FirstName" class="form-control" />

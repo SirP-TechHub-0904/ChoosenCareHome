@@ -1,4 +1,4 @@
-using ChoosenCareHome.Data.Model;
+﻿using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,13 +22,22 @@ namespace ChoosenCareHome.Pages.Data
         public Appointment Appointment { get; set; } = default!;
 
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        // Honeypot property
+        [BindProperty]
+        public string HoneyPot { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Appointments == null || Appointment == null)
+            // 🚫 Bot check
+            if (!string.IsNullOrEmpty(HoneyPot))
             {
+                ModelState.AddModelError(string.Empty, "Invalid submission detected.");
                 return Page();
             }
+            //if (!ModelState.IsValid || _context.Appointments == null || Appointment == null)
+            //{
+            //    return Page();
+            //}
 
             _context.Appointments.Add(Appointment);
             await _context.SaveChangesAsync();

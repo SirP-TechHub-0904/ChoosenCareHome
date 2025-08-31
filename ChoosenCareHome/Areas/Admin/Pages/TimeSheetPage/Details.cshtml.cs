@@ -67,8 +67,8 @@ namespace ChoosenCareHome.Areas.Admin.Pages.TimeSheetPage
 
                 await _context.SaveChangesAsync();
                 TempData["error"] = "Timesheet Not Available";
-                return RedirectToPage("./Details", new { date = date });
-                TempData["error"] = "Timesheet Not Available";
+                //return RedirectToPage("./Details", new { date = date });
+                //TempData["error"] = "Timesheet Not Available";
                 return Page();
             }
             else

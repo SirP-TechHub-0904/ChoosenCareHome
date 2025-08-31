@@ -1,4 +1,4 @@
-using ChoosenCareHome.Data.Model;
+﻿using ChoosenCareHome.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +21,20 @@ namespace ChoosenCareHome.Pages.Data
 
         [BindProperty]
         public Application Application { get; set; } = default!;
+        
+        // Honeypot property
+        [BindProperty]
+        public string HoneyPot { get; set; }
 
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            // 🚫 Bot check
+            if (!string.IsNullOrEmpty(HoneyPot))
+            {
+                // Looks like a bot → just ignore and reload page
+                ModelState.AddModelError(string.Empty, "Invalid submission detected.");
+                return Page();
+            }
 
             Application.Date = DateTime.UtcNow.AddHours(1);
             _context.Applications.Add(Application);
@@ -41,6 +50,8 @@ namespace ChoosenCareHome.Pages.Data
 
             return RedirectToPage("./SuccessFeedback", new { id = Application.Id });
         }
+
+         
     }
 
 }
