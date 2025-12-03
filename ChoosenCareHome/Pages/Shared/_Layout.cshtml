@@ -543,15 +543,20 @@
                                     Service
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-page="/Services/ClientCare">Client Care Overview</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/HourlyHomeCare">Hourly Home Care</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/DailyHomeCare">Daily Home Care</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/HospitalHomeCare">Hospital to Home Care</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/RespiteHomeCare">Respite Home Care</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/SpecializedCare">Specialized Care</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/CommunityDay">Community Day</a></li>
-                                    <li><a class="dropdown-item" asp-page="/Services/SupportedLiving">Supported Living</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/Domiciliary">Domiciliary Care</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/Live">Live-In Care</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/Complex">Complex Care Needs</a></li>
+
+                                    <li><a class="dropdown-item" asp-page="/OurServices/CareServices247">24/7 Care Services</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/Community">Community Day Services/Live Event Services</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/Palliative">Palliative Care</a></li>
+
+                                    <li><a class="dropdown-item" asp-page="/OurServices/EndOfLife">End of Life (EOL) Care</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/MentalHealthCare">Mental Health Care</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/DementiaCare">Dementia Care</a></li>
+                                    <li><a class="dropdown-item" asp-page="/OurServices/ShortBreaks">Short Breaks & Respite Care</a></li>
                                 </ul>
+
                             </li>
 
                             <li class="nav-item">
@@ -622,15 +627,48 @@
                         <div class="d-flex flex-column">
                             <h5 class="font-1 fw-bold mb-3">Quick Link</h5>
                             <div class="d-flex flex-column gap-2">
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/CareServices247">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> 24/7 Care Services
+                                </a>
 
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/ClientCare"><i class="fa-solid fa-chevron-right accent-color"></i> Client Care Overview </a>
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/HourlyHomeCare"><i class="fa-solid fa-chevron-right accent-color"></i> Hourly Home Care</a>
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/DailyHomeCare"><i class="fa-solid fa-chevron-right accent-color"></i> Daily Home Care</a>
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/HospitalHomeCare"><i class="fa-solid fa-chevron-right accent-color"></i> Hospital to Home Care</a>
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/RespiteHomeCare"><i class="fa-solid fa-chevron-right accent-color"></i> Respite Home Care</a>
-                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/Services/SpecializedCare"><i class="fa-solid fa-chevron-right accent-color"></i> Specialized Care</a>
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/Community">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Community Day Services / Live Event Services
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/Complex">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Complex Care Needs
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/DementiaCare">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Dementia Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/Domiciliary">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Domiciliary Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/EndOfLife">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> End of Life Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/Live">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Live In Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/MentalHealthCare">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Mental Health Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/Palliative">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Palliative Care
+                                </a>
+
+                                <a class="d-flex flex-row gap-2 align-items-center link-light" asp-page="/OurServices/ShortBreaks">
+                                    <i class="fa-solid fa-chevron-right accent-color"></i> Short Breaks and Respite Care
+                                </a>
 
                             </div>
+
                         </div>
                     </div>
                     <div class="col col-lg-2 mb-3">
@@ -648,13 +686,25 @@
                         <div class="d-flex flex-column mb-3">
                             <h5 class="font-1 fw-bold mb-2">Get In Touch</h5>
                             <div class="d-flex flex-wrap">
-                                <div class="d-flex flex-row me-2 gap-2 align-items-center">
+                                <div class="">
                                     <i class="fa-solid fa-location-dot"></i>
-                                    33 Haseldine Meadows,
+                                    <strong>Head Office""</strong>  33 Haseldine Meadows,
                                     Hatfield.
                                     AL10 8HA.
 
-                                     
+
+
+                                </div>
+                                <div class="">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <strong>Branch Office:</strong>
+                                    Derby City Office
+                                    Friar Gate Studio
+                                    Ford Street
+                                    Derby.
+                                    DE1 1EE
+
+
 
                                 </div>
                                 <div class="d-flex flex-row me-2 gap-2 align-items-center">
