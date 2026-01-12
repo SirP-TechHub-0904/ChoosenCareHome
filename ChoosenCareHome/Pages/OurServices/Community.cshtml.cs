@@ -1,12 +1,28 @@
+using ChoosenCareHome.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChoosenCareHome.Pages.OurServices
 {
     public class CommunityModel : PageModel
     {
-        public void OnGet()
+        private readonly ApplicationDbContext _context;
+
+        public CommunityModel(ApplicationDbContext context)
         {
+            _context = context;
+        }
+
+        public List<CommunityPlan> Plans { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            Plans = await _context.CommunityPlans
+                .Include(x => x.Schedules)
+                .OrderBy(x => x.PackageType)
+                .ThenBy(x => x.DayType)
+                .ToListAsync();
         }
     }
 }

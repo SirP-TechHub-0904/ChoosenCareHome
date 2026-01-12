@@ -1,0 +1,48 @@
+﻿@page
+@model ChoosenCareHome.Areas.Admin.Pages.PlansPage.ComPlanPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CommunityPlan[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommunityPlan[0].PackageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommunityPlan[0].DayType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CommunityPlan) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

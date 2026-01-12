@@ -280,6 +280,72 @@
                     Our care services are designed to support independence, dignity, and wellbeing at every stage of life. From care at home to more specialist support, we work alongside individuals and their families to create personalised care that truly reflects their needs, wishes, and goals.
                 </p>
 
+                <div class="">
+                    <div class="col">
+                        <div class="card p-3 with-border-bottom border-0 shadow rounded-3 h-100">
+
+                            <div class="card-body d-flex flex-column">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-5">
+                                        <img src="~/img/community.jpg" class="card-img-top rounded-3" alt="Community Day Services / Live Event Services">
+
+                                    </div>
+                                    <div class="col-md-7 col-sm-7">
+                                        <h5 class="font-1 fw-bold">Community Day Services / Live Event Services</h5>
+                                        <p class="text-gray">
+                                            These services offer structured, meaningful activities and community engagement that promote social interaction, wellbeing, and skill building. Individuals participate in workshops, recreation, community outings, and themed events in a safe, supportive setting designed to boost confidence, independence, and a strong sense of belonging.
+                                        </p>
+                                        <div class="mt-auto d-flex justify-content-center">
+                                            <a type="button" asp-page="/OurServices/Community" class="btn post-button font-2 d-flex flex-row align-items-center gap-2">
+                                                Read More <i class="fa-solid fa-circle-arrow-right mt-1"></i>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        @foreach (var plan in Model.Plans)
+                        {
+                            <div class="col-md-6 mb-4">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold mb-3">
+                                            Chosen Healthcare Ltd
+                                            <br />
+                                            <small class="text-muted">
+                                                (Community Independence Hub – @plan.PackageType @plan.DayType)
+                                            </small>
+                                        </h6>
+
+                                        @foreach (var dayGroup in plan.Schedules.GroupBy(x => x.Day))
+                                        {
+                                            <div class="mb-2">
+                                                <strong>@dayGroup.Key:</strong>
+                                                <ul class="mb-1 ps-3">
+                                                    @foreach (var slot in dayGroup)
+                                                    {
+                                                        <li>@slot.TimeSlot</li>
+                                                    }
+                                                </ul>
+
+                                                <a class="btn btn-success"
+                                                   href="mailto:info@chosenhealthcare.co.uk?subject=Community%20Independence%20Hub%20Booking&body=Hello%20Chosen%20Healthcare%2C%0D%0A%0D%0AI%20would%20like%20to%20enquire%20about%20your%20Community%20Independence%20Hub%20packages.">
+                                                    Enquire via Email
+                                                </a>
+
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
                 <div class="row row-cols-1 row-cols-lg-3 g-4">
                     <!-- Domiciliary Care -->
                     <div class="col">
@@ -354,23 +420,6 @@
                     </div>
 
                     <!-- Community Day / Live Event Services -->
-                    <div class="col">
-                        <div class="card p-3 with-border-bottom border-0 shadow rounded-3 h-100">
-                            <img src="~/img/community.jpg" class="card-img-top rounded-3" alt="Community Day Services / Live Event Services">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="font-1 fw-bold">Community Day Services / Live Event Services</h5>
-                                <p class="text-gray">
-                                    These services offer structured, meaningful activities and community engagement that promote social interaction, wellbeing, and skill building. Individuals participate in workshops, recreation, community outings, and themed events in a safe, supportive setting designed to boost confidence, independence, and a strong sense of belonging.
-                                </p>
-                                <div class="mt-auto d-flex justify-content-center">
-                                    <a type="button" asp-page="/OurServices/Community" class="btn post-button font-2 d-flex flex-row align-items-center gap-2">
-                                        Read More <i class="fa-solid fa-circle-arrow-right mt-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Palliative Care -->
                     <div class="col">
                         <div class="card p-3 with-border-bottom border-0 shadow rounded-3 h-100">
@@ -468,8 +517,6 @@
     </section>
 
     <!-- Types Of Care -->
-    
-
     <!-- Why Choose Seniorsy -->
     <section class="section">
         <div class="r-container">
@@ -624,87 +671,87 @@
     </section>
 
     <!-- News & Article -->
-    <section class="section">
-        <div class="r-container">
-            <div class="d-flex flex-column gap-3">
-                <div class="d-flex flex-lg-row flex-column text-lg-start text-center gap-lg-4 gap-2">
-                    <div class="col col-lg-3">
-                        <h6 class="font-2 accent-color">News &amp; Article</h6>
-                        <h3 class="font-1 lh-1 fw-bold fs-1 mb-3">Our Latest News</h3>
-                    </div>
-                    <div class="col col-lg-7">
-                        <p class="text-gray">
-                            Fusce non egestas felis, in rhoncus est. Morbi non congue orci. Sed
-                            venenatis varius
-                            convallis. Aenean vitae hendrerit est, eu molestie orci. Vivamus consectetur molestie
-                            lacus, at mattis augue porta et.
-                        </p>
-                    </div>
-                    <div class="col col-lg-2">
-                        <a href="https://html.rometheme.pro/seniorsy/news.html" type="button" class="btn bg-accent-color p-3">View More</a>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-lg-3">
-                    <div class="col mb-3">
-                        <div class="card border border-light-subtle">
-                            <img src="~/ui/image-600x400-5.jpg" class="card-img-top" alt="...">
-                            <div class="card-body px-3 py-4">
-                                <h6 class="font-1 lh-1 fw-bold">
-                                    Cherishing Life, Bringing Independence A Little
-                                    Closer To Home
-                                </h6>
-                                <p class="text-gray">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Integer tincidunt maximus malesuada. Quisque ut ipsum…
-                                </p>
-                                <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
-                                    Learn
-                                    More
-                                </a>
-                            </div>
+    @*<section class="section">
+            <div class="r-container">
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex flex-lg-row flex-column text-lg-start text-center gap-lg-4 gap-2">
+                        <div class="col col-lg-3">
+                            <h6 class="font-2 accent-color">News &amp; Article</h6>
+                            <h3 class="font-1 lh-1 fw-bold fs-1 mb-3">Our Latest News</h3>
+                        </div>
+                        <div class="col col-lg-7">
+                            <p class="text-gray">
+                                Fusce non egestas felis, in rhoncus est. Morbi non congue orci. Sed
+                                venenatis varius
+                                convallis. Aenean vitae hendrerit est, eu molestie orci. Vivamus consectetur molestie
+                                lacus, at mattis augue porta et.
+                            </p>
+                        </div>
+                        <div class="col col-lg-2">
+                            <a href="https://html.rometheme.pro/seniorsy/news.html" type="button" class="btn bg-accent-color p-3">View More</a>
                         </div>
                     </div>
-                    <div class="col mb-3">
-                        <div class="card border border-light-subtle">
-                            <img src="~/ui/image-600x400-4.jpg" class="card-img-top" alt="...">
-                            <div class="card-body px-3 py-4">
-                                <h6 class="font-1 lh-1 fw-bold">
-                                    Connected Living Strives To Curb Loneliness Amongst
-                                    Seniors
-                                </h6>
-                                <p class="text-gray">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Integer tincidunt maximus malesuada. Quisque ut ipsum…
-                                </p>
-                                <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
-                                    Learn
-                                    More
-                                </a>
+                    <div class="row row-cols-1 row-cols-lg-3">
+                        <div class="col mb-3">
+                            <div class="card border border-light-subtle">
+                                <img src="~/ui/image-600x400-5.jpg" class="card-img-top" alt="...">
+                                <div class="card-body px-3 py-4">
+                                    <h6 class="font-1 lh-1 fw-bold">
+                                        Cherishing Life, Bringing Independence A Little
+                                        Closer To Home
+                                    </h6>
+                                    <p class="text-gray">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        Integer tincidunt maximus malesuada. Quisque ut ipsum…
+                                    </p>
+                                    <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
+                                        Learn
+                                        More
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card border border-light-subtle">
-                            <img src="~/ui/image-600x400-1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body px-3 py-4">
-                                <h6 class="font-1 lh-1 fw-bold">
-                                    Metabolism Changes With Age, Just Not When You Might
-                                    Think
-                                </h6>
-                                <p class="text-gray">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Integer tincidunt maximus malesuada. Quisque ut ipsum…
-                                </p>
-                                <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
-                                    Learn
-                                    More
-                                </a>
+                        <div class="col mb-3">
+                            <div class="card border border-light-subtle">
+                                <img src="~/ui/image-600x400-4.jpg" class="card-img-top" alt="...">
+                                <div class="card-body px-3 py-4">
+                                    <h6 class="font-1 lh-1 fw-bold">
+                                        Connected Living Strives To Curb Loneliness Amongst
+                                        Seniors
+                                    </h6>
+                                    <p class="text-gray">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        Integer tincidunt maximus malesuada. Quisque ut ipsum…
+                                    </p>
+                                    <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
+                                        Learn
+                                        More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card border border-light-subtle">
+                                <img src="~/ui/image-600x400-1.jpg" class="card-img-top" alt="...">
+                                <div class="card-body px-3 py-4">
+                                    <h6 class="font-1 lh-1 fw-bold">
+                                        Metabolism Changes With Age, Just Not When You Might
+                                        Think
+                                    </h6>
+                                    <p class="text-gray">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        Integer tincidunt maximus malesuada. Quisque ut ipsum…
+                                    </p>
+                                    <a type="button" href="https://html.rometheme.pro/seniorsy/single_post.html" class="btn bg-accent-color py-3 px-4 text-white">
+                                        Learn
+                                        More
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>*@
 
 </main>

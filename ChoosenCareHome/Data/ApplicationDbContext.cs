@@ -27,6 +27,11 @@ namespace ChoosenCareHome.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<UserRota> UserRotas { get; set; }
         public DbSet<MailSystem> MailSystems { get; set; }
+        
+        
+        
+        public DbSet<CommunityPlan> CommunityPlans { get; set; }
+        public DbSet<CommunityPlanSchedule> CommunityPlanSchedules { get; set; }
 
 
 
